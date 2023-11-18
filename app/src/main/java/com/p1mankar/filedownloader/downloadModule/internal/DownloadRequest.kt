@@ -1,5 +1,6 @@
 package com.p1mankar.filedownloader.downloadModule.internal
 
+import com.p1mankar.filedownloader.downloadModule.utils.Status
 import com.p1mankar.filedownloader.downloadModule.utils.getUniqueId
 import kotlinx.coroutines.Job
 
@@ -12,6 +13,7 @@ class DownloadRequest private constructor(
     internal val fileName: String,
     internal var readTimeOut: Int,
     internal var connectTimeOut: Int,
+    internal var status: Status = Status.UNKNOWN,
 ) {
 
     internal var totalBytes: Long = 0

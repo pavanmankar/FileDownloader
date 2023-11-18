@@ -4,9 +4,12 @@ import com.p1mankar.filedownloader.downloadModule.internal.DownloadRequest
 import java.io.IOException
 import java.io.InputStream
 
-interface HttpClient {
+interface HttpClient : Cloneable{
 
-    fun connect(req: DownloadRequest)
+
+    fun getContentLength(): Long
+
+    fun getHeaderFields(): Map<String, List<String>>
 
     @Throws(IOException::class)
     fun getResponseCode(): Int
@@ -14,9 +17,14 @@ interface HttpClient {
     @Throws(IOException::class)
     fun getInputStream(): InputStream?
 
-    fun getContentLength(): Long
-
-    @Throws(IOException::class)
     fun getErrorStream(): InputStream?
 
+    public override fun clone(): HttpClient
+
+    @Throws(IOException::class)
+    fun connect(req: DownloadRequest)
+
+    fun getResponseHeader(name: String): String
+
+    fun close()
 }
