@@ -79,7 +79,11 @@ class DownloadTask(private val req: DownloadRequest, private val httpClient: Htt
                     if (byteCount == -1) {
                         break
                     }
-
+                    if (req.status === Status.CANCELLED) {
+                        deleteTempFile()
+                        onError("Cancelled")
+                        return@withContext
+                    }
                     outputStream.write(buff, 0, byteCount)
                     req.downloadedBytes = req.downloadedBytes + byteCount
 

@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                     binding.progressText1.text = "0%"
                     Log.d(TAG, it)
                 })
-            } else {
+            } else if (binding.startCancelButton1.text.equals("Cancel")) {
                 downloader.cancel(TAG + "1")
                 binding.startCancelButton1.text = "Start"
             }
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                     binding.progressText1.text = "0%"
                     Log.d(TAG, it)
                 })
-            } else {
+            } else if (binding.startCancelButton2.text.equals("Cancel")) {
                 downloader.cancel(downloadId2)
                 binding.startCancelButton2.text = "Start"
             }

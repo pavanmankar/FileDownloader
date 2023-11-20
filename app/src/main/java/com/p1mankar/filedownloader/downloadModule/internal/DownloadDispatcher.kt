@@ -2,6 +2,7 @@ package com.library.internal
 
 import com.library.httpclient.HttpClient
 import com.p1mankar.filedownloader.downloadModule.internal.DownloadRequest
+import com.p1mankar.filedownloader.downloadModule.utils.Status
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -47,6 +48,7 @@ class DownloadDispatcher(private val httpClient: HttpClient) {
     }
 
     fun cancel(req: DownloadRequest) {
+        req.status = Status.CANCELLED
         req.job.cancel()
     }
 
