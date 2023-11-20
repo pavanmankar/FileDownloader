@@ -34,6 +34,7 @@ class DownloadTask(private val req: DownloadRequest, private val httpClient: Htt
     ) {
         withContext(Dispatchers.IO) {
             try {
+
                 tempPath = getTempPath(req.dirPath, req.fileName)
                 var file = File(tempPath)
 
