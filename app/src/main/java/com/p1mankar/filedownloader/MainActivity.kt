@@ -1,7 +1,5 @@
 package com.p1mankar.filedownloader
 
-import android.app.Application
-import android.content.Context
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -77,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                     "https://media.giphy.com/media/Bk0CW5frw4qfS/giphy.gif",
                     dirPath,
                     "docu.gif",
-                ).tag(TAG + "1").build()
+                ).tag(TAG + "2").build()
                 downloadId2 = downloader.enqueue(request1, onStart = {
                     binding.status2.text = "Started"
                     binding.startCancelButton2.text = "Cancel"
