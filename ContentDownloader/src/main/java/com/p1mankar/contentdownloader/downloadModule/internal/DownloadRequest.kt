@@ -14,6 +14,7 @@ class DownloadRequest private constructor(
     internal var readTimeOut: Int,
     internal var connectTimeOut: Int,
     internal var status: Status = Status.UNKNOWN,
+    internal val headers: HashMap<String, List<String>>?,
 ) {
 
     internal var totalBytes: Long = 0
@@ -34,6 +35,7 @@ class DownloadRequest private constructor(
         private var tag: String? = null
         private var readTimeOut: Int = 0
         private var connectTimeOut: Int = 0
+        private var headers: HashMap<String, List<String>>? = null
 
         fun tag(tag: String) = apply {
             this.tag = tag
@@ -47,6 +49,10 @@ class DownloadRequest private constructor(
             this.connectTimeOut = timeout
         }
 
+        fun headers(headers: HashMap<String, List<String>>) = apply {
+            this.headers = headers
+        }
+
         fun build(): DownloadRequest {
             return DownloadRequest(
                 url = url,
@@ -56,6 +62,7 @@ class DownloadRequest private constructor(
                 fileName = fileName,
                 readTimeOut = readTimeOut,
                 connectTimeOut = connectTimeOut,
+                headers = headers,
             )
         }
     }

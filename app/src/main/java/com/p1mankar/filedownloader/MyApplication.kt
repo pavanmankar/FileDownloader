@@ -3,7 +3,7 @@ package com.p1mankar.filedownloader
 import android.app.Application
 import com.library.Downloader
 
-class FileDownloader : Application() {
+class MyApplication : Application() {
 
     lateinit var downloader: Downloader
 

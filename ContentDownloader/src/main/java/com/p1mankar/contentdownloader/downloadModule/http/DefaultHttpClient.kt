@@ -73,14 +73,14 @@ class DefaultHttpClient : HttpClient {
     }
 
     private fun addHeaders(req: DownloadRequest) {
-//        val headers: HashMap<String, List<String>>? = req.headers
-//        if (headers != null) {
-//            val entries: Set<Map.Entry<String, List<String>>> = headers.entries
-//            for ((name, list) in entries) {
-//                for (value in list) {
-//                    connection?.addRequestProperty(name, value)
-//                }
-//            }
-//        }
+        val headers: HashMap<String, List<String>>? = req.headers
+        if (headers != null) {
+            val entries: Set<Map.Entry<String, List<String>>> = headers.entries
+            for ((name, list) in entries) {
+                for (value in list) {
+                    connection?.addRequestProperty(name, value)
+                }
+            }
+        }
     }
 }

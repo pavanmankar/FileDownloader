@@ -3,7 +3,9 @@ package com.library.internal
 import com.library.httpclient.HttpClient
 import com.p1mankar.filedownloader.downloadModule.internal.DownloadRequest
 import com.p1mankar.filedownloader.downloadModule.utils.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
@@ -112,7 +114,7 @@ class DownloadTask(private val req: DownloadRequest, private val httpClient: Htt
                 onError(e.toString())
                 return@withContext
             } finally {
-                closeAllSafely(outputStream)
+                closeAllSafely()
             }
         }
     }
@@ -125,7 +127,7 @@ class DownloadTask(private val req: DownloadRequest, private val httpClient: Htt
         return false
     }
 
-    private suspend fun closeAllSafely(outputStream: FileDownloadOutputStream) {
+    private suspend fun closeAllSafely() {
 
         try {
             httpClient.close()
@@ -134,14 +136,15 @@ class DownloadTask(private val req: DownloadRequest, private val httpClient: Htt
         }
 
         try {
-            inputStream!!.close()
+            inputStream.let { it?.close() }
         } catch (e: IOException) {
             e.printStackTrace()
         }
 
-
         try {
-            outputStream.close()
+            if (::outputStream.isInitialized) {
+                outputStream.close()
+            }
         } catch (e: IOException) {
             e.printStackTrace()
         }

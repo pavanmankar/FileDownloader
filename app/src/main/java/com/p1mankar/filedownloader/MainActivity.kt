@@ -1,5 +1,7 @@
 package com.p1mankar.filedownloader
 
+import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -24,14 +26,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        downloader = Downloader.create()
+        downloader = (application as MyApplication).downloader
         dirPath = Environment.getExternalStorageDirectory().path + "/Download"
         setOnClickListener()
     }
 
     private fun setOnClickListener() {
-
-
         binding.startCancelButton1.setOnClickListener {
             var downloadId1 = 0
             if (binding.startCancelButton1.text.equals("Start")) {
@@ -74,9 +74,9 @@ class MainActivity : AppCompatActivity() {
             var downloadId2 = 0
             if (binding.startCancelButton2.text.equals("Start")) {
                 val request1 = downloader.newReqBuilder(
-                    "https://www.africau.edu/images/default/sample.pdf",
+                    "https://media.giphy.com/media/Bk0CW5frw4qfS/giphy.gif",
                     dirPath,
-                    "docu.pdf",
+                    "docu.gif",
                 ).tag(TAG + "1").build()
                 downloadId2 = downloader.enqueue(request1, onStart = {
                     binding.status2.text = "Started"
@@ -95,10 +95,10 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "On Complete")
                     binding.startCancelButton2.text = "Completed"
                 }, onError = {
-                    binding.status1.text = "Error : $it"
+                    binding.status2.text = "Error : $it"
                     binding.resumePauseButton2.visibility = View.GONE
                     binding.progressBar2.progress = 0
-                    binding.progressText1.text = "0%"
+                    binding.progressText2.text = "0%"
                     Log.d(TAG, it)
                 })
             } else if (binding.startCancelButton2.text.equals("Cancel")) {
