@@ -22,7 +22,7 @@ Update your module level build.gradle file with the following dependency.
 
 ```groovy
 dependencies {
-   implementation 'com.github.pavan7387:FileDownloader:1.0.0'
+   implementation 'com.github.pavanmankar:FileDownloader:1.0.0'
 }
 ```
 Do not forget to add internet permission in manifest if already not present
